@@ -53,10 +53,20 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
         cell.overViewLabel.text = moviesDataList[indexPath.row].overview
         let imageURL = URL(string : "https://image.tmdb.org/t/p/original\(moviesDataList[indexPath.row].poster_path)")
         cell.ImageLabel.downloadImage(from: imageURL!)
-        cell.layer.cornerRadius = 30
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "detailPageSegue", sender: nil)
+        movieTableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "detailPageSegue", let indexPath = movieTableView.indexPathForSelectedRow , let destinationVC = segue.destination as? DetailPageViewController {
+                let selectedMovie = moviesDataList[indexPath.row]
+                destinationVC.movieData = selectedMovie
+        }
+    }
     
 }
 
