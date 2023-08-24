@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Movie Sphere-->
+        <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MovieSphere" customModuleProvider="target" sceneMemberID="viewController">
@@ -83,10 +83,10 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="m0g-JY-TjC" secondAttribute="bottom" id="qVE-x5-m6n"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Movie Sphere" id="U1z-w5-hIi"/>
+                    <navigationItem key="navigationItem" id="U1z-w5-hIi"/>
                     <connections>
                         <outlet property="movieTableView" destination="m0g-JY-TjC" id="W8C-YV-Cz4"/>
-                        <segue destination="Enu-ho-1Ev" kind="show" identifier="detailPageSegue" id="xks-Ro-A9G"/>
+                        <segue destination="Enu-ho-1Ev" kind="show" identifier="detailPageSegue" id="Ce4-eo-nVa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

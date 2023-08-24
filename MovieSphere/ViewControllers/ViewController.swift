@@ -9,9 +9,9 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    var moviesDataList = [MovieData]()
+    private var moviesDataList = [MovieData]()
     
-    @IBOutlet weak var movieTableView: UITableView!
+    @IBOutlet private weak var movieTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +19,7 @@ class ViewController: UIViewController {
     }
 
     func fetchData() {
-        let url = "https://api.themoviedb.org/3/movie/now_playing?api_key=38a73d59546aa378980a88b645f487fc&language=en-US&page=1"
+        let url = Constants.URL.apiURL
         guard let urlString = URL(string: url) else {
             return
         }
@@ -48,21 +48,21 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = movieTableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MovieListTableViewCell
+        let cell = movieTableView.dequeueReusableCell(withIdentifier: Constants.CellIdentifier.movieListCell, for: indexPath) as! MovieListTableViewCell
         cell.nameLabel.text = moviesDataList[indexPath.row].title
         cell.overViewLabel.text = moviesDataList[indexPath.row].overview
-        let imageURL = URL(string : "https://image.tmdb.org/t/p/original\(moviesDataList[indexPath.row].poster_path)")
+        let imageURL = URL(string : "\(Constants.URL.imageBaseURL)\(moviesDataList[indexPath.row].poster_path)")
         cell.ImageLabel.downloadImage(from: imageURL!)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "detailPageSegue", sender: nil)
+        performSegue(withIdentifier: Constants.Segue.detailPageSegue, sender: nil)
         movieTableView.deselectRow(at: indexPath, animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "detailPageSegue", let indexPath = movieTableView.indexPathForSelectedRow , let destinationVC = segue.destination as? DetailPageViewController {
+        if segue.identifier == Constants.Segue.detailPageSegue, let indexPath = movieTableView.indexPathForSelectedRow , let destinationVC = segue.destination as? DetailPageViewController {
                 let selectedMovie = moviesDataList[indexPath.row]
                 destinationVC.movieData = selectedMovie
         }
