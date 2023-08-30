@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import SDWebImage
 
 class DetailPageViewController: UIViewController {
     
     var movieData : MovieData?
+    
     
     @IBOutlet private weak var moviePosterImage: UIImageView!
     
@@ -35,7 +37,9 @@ class DetailPageViewController: UIViewController {
         popLabel.text = "\(movie.popularity)"
         let posterPath = movie.poster_path
         let imageURL = URL(string : "\(Constants.URL.imageBaseURL)\(posterPath)")
-        moviePosterImage.downloadImage(from: imageURL!)
+        moviePosterImage.sd_setImage(with: imageURL, placeholderImage: UIImage(named: Constants.Defaults.image))
+        moviePosterImage.layer.cornerRadius = 10
+        moviePosterImage.clipsToBounds = true
         overViewLabel.text = movie.overview
     }
 }

@@ -9,6 +9,8 @@ import Foundation
 import UIKit
 
 extension UIImageView {
+    
+    // Not using this extension as of now, Since SDWebImage Library is pretty awesome.
     func downloadImage(from url : URL) {
         contentMode = .scaleToFill
         let dataTask = URLSession.shared.dataTask(with: url) { data, response, error in
