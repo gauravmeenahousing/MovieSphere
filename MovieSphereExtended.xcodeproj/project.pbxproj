@@ -11,6 +11,7 @@
 		721D61DA2A9F44C800B27243 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 721D61D92A9F44C800B27243 /* SDWebImage */; };
 		721D61DC2A9F44C800B27243 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 721D61DB2A9F44C800B27243 /* SDWebImageMapKit */; };
 		722470962A96047B00247519 /* DetailPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722470952A96047B00247519 /* DetailPageViewController.swift */; };
+		722608A32AA5CE3F00B39B45 /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = 722608A22AA5CE3F00B39B45 /* SkeletonView */; };
 		7282FD552A94AAC8003091AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7282FD542A94AAC8003091AB /* AppDelegate.swift */; };
 		7282FD572A94AAC8003091AB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7282FD562A94AAC8003091AB /* SceneDelegate.swift */; };
 		7282FD592A94AAC8003091AB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7282FD582A94AAC8003091AB /* ViewController.swift */; };
@@ -77,6 +78,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				721D61DC2A9F44C800B27243 /* SDWebImageMapKit in Frameworks */,
+				722608A32AA5CE3F00B39B45 /* SkeletonView in Frameworks */,
 				721D61DA2A9F44C800B27243 /* SDWebImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -233,6 +235,7 @@
 			packageProductDependencies = (
 				721D61D92A9F44C800B27243 /* SDWebImage */,
 				721D61DB2A9F44C800B27243 /* SDWebImageMapKit */,
+				722608A22AA5CE3F00B39B45 /* SkeletonView */,
 			);
 			productName = MovieSphere;
 			productReference = 7282FD512A94AAC8003091AB /* MovieSphereExtended.app */;
@@ -308,6 +311,7 @@
 			mainGroup = 7282FD482A94AAC8003091AB;
 			packageReferences = (
 				721D61D82A9F44C800B27243 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				722608A12AA5CE3F00B39B45 /* XCRemoteSwiftPackageReference "SkeletonView" */,
 			);
 			productRefGroup = 7282FD522A94AAC8003091AB /* Products */;
 			projectDirPath = "";
@@ -715,6 +719,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		722608A12AA5CE3F00B39B45 /* XCRemoteSwiftPackageReference "SkeletonView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Juanpe/SkeletonView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -727,6 +739,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 721D61D82A9F44C800B27243 /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImageMapKit;
+		};
+		722608A22AA5CE3F00B39B45 /* SkeletonView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 722608A12AA5CE3F00B39B45 /* XCRemoteSwiftPackageReference "SkeletonView" */;
+			productName = SkeletonView;
 		};
 /* End XCSwiftPackageProductDependency section */
 

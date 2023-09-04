@@ -7,8 +7,9 @@
 
 import Foundation
 import UIKit
+import SkeletonView
 
-extension ViewController : UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+extension ViewController : SkeletonTableViewDataSource, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewMovie.filteredData.count
     }
@@ -39,10 +40,47 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource, UISearchB
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText == "" {
             viewMovie.filteredData = viewMovie.moviesDataList
+            nextButton.isHidden = false
         }else {
             viewMovie.filteredData = viewMovie.moviesDataList.filter{ $0.title.contains(searchText)}
+            nextButton.isHidden = true
         }
         movieTableView.reloadData()
     }
     
+    func setupView() {
+        viewMovie.observerDataChanges { [weak self] in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: { [self] in
+                self?.movieTableView.reloadData()
+                self?.movieTableView.stopSkeletonAnimation()
+                self?.view.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
+            })
+        }
+        self.viewMovie.fetchData(url: Constants.URL.apiURL+"\(self.page)")
+    }
+    
+    // TODO: Exception handling when the page reach to the last page.
+    @IBAction func pressNextButton(_ sender: Any) {
+        page = min(page + 1, 88)
+        nextButton.isHidden = page == 88
+        backButton.isHidden = false
+        showSkeletonView()
+        self.viewMovie.fetchData(url: Constants.URL.apiURL+"\(self.page)")
+    }
+    
+    @IBAction func backButtonPressed(_ sender: Any) {
+        page = max(page - 1, 0)
+        backButton.isHidden = page == 1
+        showSkeletonView()
+        self.viewMovie.fetchData(url: Constants.URL.apiURL+"\(self.page)")
+    }
+    
+    func showSkeletonView() {
+        movieTableView.isSkeletonable = true
+        movieTableView.showSkeleton(usingColor: .orange, transition: .crossDissolve(0.25))
+    }
+    
+    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        return Constants.CellIdentifier.movieListCell
+    }
 }
