@@ -5,6 +5,9 @@
 //  Created by Gaurav Meena on 22/08/23.
 //
 
+// Liskov Substitution Principal : In the "ViewController", We have used "MovieData" as a uniform, i.e. we can further add other
+//                                 functionalities and it'll not affect the ViewController.
+
 import Foundation
 
 struct MovieData : Codable {

@@ -5,14 +5,29 @@
 //  Created by Gaurav Meena on 29/08/23.
 //
 
+// Single Responsiblity Principal : Managing movie data and modifying observers
+// Open/Closed Principal : conforms the "MovieListViewProvider" protocol
+
 import Foundation
 
-class MovieListView {
+
+protocol MovieListViewProvider {
+    var moviesDataList : [MovieData] { get set }
+    var filteredData : [MovieData] {get set}
+    func fetchData(url : String)
+    func observerDataChanges(observer: @escaping () -> Void)
+}
+
+class MovieListView : MovieListViewProvider {
     
     var moviesDataList = [MovieData]()
-    var filteredData   = [MovieData]()
+    var filteredData   = [MovieData]() {
+        didSet {
+            notifyObservers() // observer instance
+        }
+    }
     
-    private var observers : [() -> Void] = [] // observer instance 
+    private var observers : [() -> Void] = []
     
     func observerDataChanges(observer: @escaping () -> Void) {
         observers.append(observer)
@@ -32,7 +47,6 @@ class MovieListView {
                     let jsonData = try decoder.decode(JSONData.self, from: data)
                     self.moviesDataList = jsonData.results
                     self.filteredData = self.moviesDataList
-                    self.notifyObservers()
                 } catch {
                     print("Error occured while decoding JSON : \(error)")
                 }

@@ -9,6 +9,12 @@ import ExtensionKit
 import UIKit
 import SkeletonView
 
+// Interface Segregation Principal : The client as in "ViewController" is using the "MovieListView" instance, which conforms to
+//                                   "MovieListViewProvider" protocol. That means It uses all functionalities that it conforms to.
+
+// Dependency Inversion Principal : "ViewController" now does not rely on any random implementation, but relies on the abstraction
+//                                  provided by the "MovieListViewProvider" protocol.
+
 class ViewController: UIViewController {
 
     @IBOutlet weak var nextButton: UIButton!
@@ -17,11 +23,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var searchBar: UINavigationItem!
     @IBOutlet weak var movieTableView: UITableView!
     var page = 1
-    var viewMovie = MovieListView()
+    var viewMovie : MovieListViewProvider!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        backButton.isHidden = true
+        viewMovie = MovieListView()
         setupView()
     }
 }

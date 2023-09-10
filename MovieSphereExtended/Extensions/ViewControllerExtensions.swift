@@ -10,6 +10,7 @@ import UIKit
 import SkeletonView
 
 extension ViewController : SkeletonTableViewDataSource, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+    
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewMovie.filteredData.count
     }
@@ -49,6 +50,7 @@ extension ViewController : SkeletonTableViewDataSource, UITableViewDelegate, UIT
     }
     
     func setupView() {
+        backButton.isHidden = true
         viewMovie.observerDataChanges { [weak self] in
             DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: { [self] in
                 self?.movieTableView.reloadData()
